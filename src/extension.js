@@ -201,7 +201,7 @@ class OpenWeatherMenuButton extends PanelMenu.Button {
         this._onNetworkStateChanged.bind(this)
       );
 
-      this.menu.connect("open-state-changed", this.recalcLayout.bind(this));
+    this.menu.connect("open-state-changed", this.recalcLayout.bind(this));
 
       let _firstBootWait = this._startupDelay;
       if (_firstBoot && _firstBootWait !== 0)
@@ -1355,29 +1355,33 @@ class OpenWeatherMenuButton extends PanelMenu.Button {
       this._is_first_run_cycle ||
       this._old_position_index !== this._position_index
     ) {
-      st13RemoveActor(this.get_parent(), this);
+      const container = this.container;
+      const parent = container.get_parent();
 
-      let children = null;
+      if (parent)
+        parent.remove_child(container);
+
       switch (this._position_in_panel) {
         case WeatherPosition.LEFT:
-          children = Main.panel._leftBox.get_children();
-          Main.panel._leftBox.insert_child_at_index(this, this._position_index);
+          Main.panel._leftBox.insert_child_at_index(
+            container,
+            this._position_index
+          );
           break;
         case WeatherPosition.CENTER:
-          children = Main.panel._centerBox.get_children();
           Main.panel._centerBox.insert_child_at_index(
-            this,
+            container,
             this._position_index
           );
           break;
         case WeatherPosition.RIGHT:
-          children = Main.panel._rightBox.get_children();
           Main.panel._rightBox.insert_child_at_index(
-            this,
+            container,
             this._position_index
           );
           break;
       }
+
       this._old_position_in_panel = this._position_in_panel;
       this._old_position_index = this._position_index;
       this._is_first_run_cycle = 1;
@@ -1872,20 +1876,23 @@ class OpenWeatherMenuButton extends PanelMenu.Button {
       x_expand: true,
       style_class: "openweather-forecasts",
     });
-    let pan = new Clutter.PanAction({
-      interpolate: true,
-    });
-    pan.connect("pan", (action) => {
-      let [dist, dx, dy] = action.get_motion_delta(0);
+
+    const pan = new Clutter.PanGesture();
+
+    pan.connect("pan-update", (gesture) => {
+      const delta = gesture.get_delta();
+      const dx = delta.get_x();
+      const dy = delta.get_y();
 
       this.scrollForecastBy(
         -1 *
           ((dy + dx) / this._forecastScrollBox.width) *
           hscroll(this._forecastScrollBox).page_size
       );
-      return false;
     });
+
     this._forecastScrollBox.add_action(pan);
+
     this._forecastScrollBox.connect("scroll-event", this._onScroll.bind(this));
     this._forecastScrollBox.vscrollbar_policy = St.PolicyType.NEVER;
     this._forecastScrollBox.hscrollbar_policy = St.PolicyType.AUTOMATIC;
