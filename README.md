@@ -13,9 +13,6 @@ Changes include:
 
 Tested on GNOME Shell 50.4.
 
-OpenWeather Refined is a simple extension for displaying weather conditions and
-forecasts for any location on Earth in the GNOME Shell.
-
 [![Screenshot](./openweather-screenshot.png)](./openweather-screenshot.png)
 
 OpenWeather Refined is a simple extension for displaying weather conditions and
