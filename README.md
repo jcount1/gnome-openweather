@@ -85,12 +85,10 @@ First make sure you have the following dependencies installed:
 Run the following commands:
 
 ```shell
-git clone https://github.com/penguin-teal/gnome-openweather.git
+git clone https://github.com/jcount1/gnome-openweather.git
+
 
 cd gnome-openweather
-
-# This switches to the latest stable release
-git switch --detach latest
 
 make && make install
 ```
