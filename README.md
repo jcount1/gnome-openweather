@@ -1,8 +1,6 @@
 
 # OpenWeather Refined
 
-# OpenWeather Refined
-
 ## GNOME 49/50 compatibility fork
 
 This fork updates OpenWeather Refined v139 for GNOME Shell 49 and 50.
