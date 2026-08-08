@@ -1,6 +1,23 @@
 
 # OpenWeather Refined
 
+# OpenWeather Refined
+
+## GNOME 49/50 compatibility fork
+
+This fork updates OpenWeather Refined v139 for GNOME Shell 49 and 50.
+
+Changes include:
+- GNOME 49/50 metadata support
+- updated panel container handling
+- replacement of the obsolete `Clutter.PanAction` with `Clutter.PanGesture`
+- restored weather popup and forecast interaction on GNOME Shell 50
+
+Tested on GNOME Shell 50.4.
+
+OpenWeather Refined is a simple extension for displaying weather conditions and
+forecasts for any location on Earth in the GNOME Shell.
+
 [![Screenshot](./openweather-screenshot.png)](./openweather-screenshot.png)
 
 OpenWeather Refined is a simple extension for displaying weather conditions and
